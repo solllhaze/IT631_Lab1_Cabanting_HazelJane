@@ -78,6 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.focus();
       }
     });
+
+    // Handle Active Nav State on Click (Dashboard, Requests, Enrollment, Grades, Settings)
+    const navLinks = primaryNav.querySelectorAll('.nav-link');
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.forEach((l) => {
+          l.classList.remove('is-active');
+          l.removeAttribute('aria-current');
+        });
+        link.classList.add('is-active');
+        link.setAttribute('aria-current', 'page');
+
+        // Close mobile drawer on navigation
+        if (window.innerWidth < 768) {
+          primaryNav.classList.remove('is-open');
+          if (sidebarHeader) {
+            sidebarHeader.classList.remove('is-open');
+          }
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        }
+      });
+    });
   }
 
   // --------------------------------------------------------------------------
