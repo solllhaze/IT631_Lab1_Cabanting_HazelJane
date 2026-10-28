@@ -1,0 +1,30 @@
+================================================================================
+Davao del Sur State College (DSSC)
+IT 631 – Integrative Programming and Technologies I
+Lesson 1 Laboratory Activity: Student Services Dashboard
+Student: Hazel Jane Cabanting | Section: BSIT-3B
+Submission Deliverable: exit_ticket.txt
+================================================================================
+
+Question 1 — Layout Architecture
+Prompt: Between a top navigation and a sidebar shell, which pattern is better suited for an administrative DSSC portal managing enrollments, grades, and faculty records? Why?
+
+Answer:
+A vertical sidebar shell is substantially better suited for an administrative DSSC portal managing enrollments, grades, and faculty records because institutional systems possess deep, multi-tiered navigational hierarchies. While a horizontal top navbar quickly becomes crowded and relies on brittle nested dropdown menus when handling numerous academic modules, a collapsible sidebar provides scalable vertical real estate with categorized groupings and intuitive icon-text pairings. This ensures administrative staff and faculty can access complex records efficiently on desktop viewports without sacrificing quick collapsed-state navigation.
+
+--------------------------------------------------------------------------------
+
+Question 2 — Responsive Tactics
+Prompt: When scaling down a 6-column data table to a 360px mobile viewport, what specific design strategy would you apply to prevent table data from becoming unreadable?
+
+Answer:
+When scaling a dense six-column data table down to a 360px mobile viewport, the best responsive tactic is transforming tabular rows into vertically stacked visual card containers using CSS media queries (display: block on table elements). Within each card, individual data cells are formatted as full-width key-value rows using CSS ::before pseudo-elements that display each column's title via content: attr(data-label). This approach eliminates page-level horizontal blowouts, preserves ample touch targets, and guarantees that students can review complete academic records without awkward horizontal panning.
+
+--------------------------------------------------------------------------------
+
+Question 3 — Accessibility
+Prompt: Explain why removing browser outlines (outline: none) without providing an alternate focus style harms usability, and specify what visual indicators you used instead.
+
+Answer:
+Removing browser outlines with outline: none without supplying an alternative focus indicator severely harms usability by making interactive elements invisible to keyboard-only users and individuals relying on assistive navigation. Without a distinct focus cue, sighted students navigating via the Tab key cannot perceive their current position on the page, leading to disorientation and form abandonment. In this project, we implemented a dedicated :focus-visible rule that renders a high-contrast 2px solid royal blue ring with a 2px offset (outline: 2px solid #1d4ed8; outline-offset: 2px;), ensuring undeniable visibility on active elements without disrupting mouse users.
+================================================================================
