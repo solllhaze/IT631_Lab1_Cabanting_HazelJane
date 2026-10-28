@@ -1435,6 +1435,11 @@ body.simulating-mobile {
   margin: 0 auto !important;
   border-left: 2px solid var(--color-border-strong);
   border-right: 2px solid var(--color-border-strong);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+}
+
+body.simulating-mobile .app-layout-shell {
+  flex-direction: column !important;
 }
 
 body.simulating-mobile .mobile-top-bar {
@@ -1443,11 +1448,21 @@ body.simulating-mobile .mobile-top-bar {
 
 body.simulating-mobile .site-header {
   position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 260px !important;
+  height: 100vh !important;
   transform: translateX(-100%) !important;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2) !important;
 }
 
 body.simulating-mobile .site-header.is-open {
   transform: translateX(0) !important;
+}
+
+body.simulating-mobile .main-canvas {
+  padding: 1rem 0.75rem 2.5rem 0.75rem !important;
 }
 
 body.simulating-mobile .metric-grid {
@@ -1457,4 +1472,56 @@ body.simulating-mobile .metric-grid {
 body.simulating-mobile .dashboard-split-layout {
   display: flex !important;
   flex-direction: column !important;
+}
+
+body.simulating-mobile .requests-table thead {
+  display: none !important;
+}
+
+body.simulating-mobile .requests-table,
+body.simulating-mobile .requests-table tbody,
+body.simulating-mobile .requests-table tr,
+body.simulating-mobile .requests-table td {
+  display: block !important;
+  width: 100% !important;
+}
+
+body.simulating-mobile .requests-table tbody {
+  padding: 0.75rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+body.simulating-mobile .requests-table tr {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.75rem !important;
+}
+
+body.simulating-mobile .requests-table td {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0.35rem 0 !important;
+  border-bottom: 1px dashed var(--color-border) !important;
+}
+
+body.simulating-mobile .requests-table td:last-child {
+  border-bottom: none !important;
+  padding-top: 0.5rem !important;
+}
+
+body.simulating-mobile .requests-table td::before {
+  content: attr(data-label) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  color: var(--color-text-muted) !important;
+}
+
+body.simulating-mobile .enrollment-grid,
+body.simulating-mobile .grades-summary-cards {
+  grid-template-columns: 1fr !important;
 }
