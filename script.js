@@ -79,16 +79,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Handle Active Nav State on Click (Dashboard, Requests, Enrollment, Grades, Settings)
+    // Tab View Switching System: Dashboard, Requests, Enrollment, Grades, Settings
     const navLinks = primaryNav.querySelectorAll('.nav-link');
+    const tabViews = document.querySelectorAll('.tab-view');
+
+    function activateTab(targetViewId) {
+      if (!targetViewId) return;
+      tabViews.forEach((view) => {
+        if (view.id === targetViewId) {
+          view.classList.add('is-active-view');
+        } else {
+          view.classList.remove('is-active-view');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        const isMatch = link.getAttribute('data-target') === targetViewId;
+        if (isMatch) {
+          link.classList.add('is-active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('is-active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
     navLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        navLinks.forEach((l) => {
-          l.classList.remove('is-active');
-          l.removeAttribute('aria-current');
-        });
-        link.classList.add('is-active');
-        link.setAttribute('aria-current', 'page');
+      link.addEventListener('click', (e) => {
+        const targetViewId = link.getAttribute('data-target');
+        if (targetViewId) {
+          activateTab(targetViewId);
+        }
 
         // Close mobile drawer on navigation
         if (window.innerWidth < 768) {
@@ -101,6 +123,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+
+    // Quick Action button in top pill bar (+ New Request)
+    const btnQuickNewRequest = document.getElementById('btn-quick-new-request');
+    if (btnQuickNewRequest) {
+      btnQuickNewRequest.addEventListener('click', () => {
+        activateTab('view-requests');
+        const formCategory = document.getElementById('service-category');
+        if (formCategory) {
+          setTimeout(() => formCategory.focus(), 100);
+        }
+      });
+    }
+
+    // Auto-detect view from URL hash on load
+    const hashToView = {
+      '#overview': 'view-dashboard',
+      '#my-requests': 'view-requests',
+      '#new-request': 'view-requests',
+      '#enrollment': 'view-enrollment',
+      '#grades': 'view-grades',
+      '#settings': 'view-settings'
+    };
+    if (window.location.hash && hashToView[window.location.hash]) {
+      activateTab(hashToView[window.location.hash]);
+    }
   }
 
   // --------------------------------------------------------------------------
